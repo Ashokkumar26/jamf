@@ -1,0 +1,34 @@
+{
+  "name": "jamf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@skitter/automation-schema-generator": "^1.3.0",
+    "@skitter/automation-utils": "^1.1.0",
+    "@types/jsontoxml": "^1.0.1",
+    "axios": "^0.21.0",
+    "base-64": "^1.0.0",
+    "html2plaintext": "^2.1.2",
+    "jsontoxml": "^1.0.1",
+    "ramda": "^0.27.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/base-64": "^0.1.3",
+    "@types/jest": "^26.0.15",
+    "@types/ramda": "^0.27.32",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.0.5"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "output": {
+    "properties": {
+      "id": {
+        "examples": [1],
+        "type": "number",
+        "title": "Id",
+        "$id": "/properties/id"
+      },
+      "name": {
+        "examples": ["Teachers"],
+        "type": "string",
+        "title": "Name",
+        "$id": "/properties/name"
+      },
+      "is_smart": {
+        "examples": [true],
+        "type": "boolean",
+        "title": "Is smart",
+        "$id": "/properties/is_smart"
+      },
+      "is_notify_on_change": {
+        "examples": [true],
+        "type": "boolean",
+        "title": "Is notify on change",
+        "$id": "/properties/is_notify_on_change"
+      },
+      "site": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "examples": [1],
+            "type": "number",
+            "title": "Id",
+            "$id": "/properties/site/id"
+          },
+          "name": {
+            "examples": ["None"],
+            "type": "string",
+            "title": "Name",
+            "$id": "/properties/site/name"
+          }
+        },
+        "title": "site"
+      },
+      "criteria": {
+        "type": "collection",
+        "title": "criteria",
+        "$id": "/properties/criteria",
+        "item": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "examples": ["Email Address"],
+              "type": "string",
+              "title": "Name",
+              "$id": "/properties/name"
+            },
+            "priority": {
+              "examples": [0],
+              "type": "number",
+              "title": "Priority",
+              "$id": "/properties/priority"
+            },
+            "and_or": {
+              "examples": ["and"],
+              "type": "string",
+              "title": "And or",
+              "$id": "/properties/and_or"
+            },
+            "search_type": {
+              "examples": ["like"],
+              "type": "string",
+              "title": "Search type",
+              "$id": "/properties/search_type"
+            },
+            "value": {
+              "examples": ["company.com"],
+              "type": "string",
+              "title": "Value",
+              "$id": "/properties/value"
+            },
+            "opening_paren": {
+              "examples": [false],
+              "type": "boolean",
+              "title": "Opening paren",
+              "$id": "/properties/opening_paren"
+            },
+            "closing_paren": {
+              "examples": [false],
+              "type": "boolean",
+              "title": "Closing paren",
+              "$id": "/properties/closing_paren"
+            }
+          }
+        }
+      },
+      "users": {
+        "type": "collection",
+        "title": "users",
+        "$id": "/properties/users",
+        "item": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "examples": [1],
+              "type": "number",
+              "title": "Id",
+              "$id": "/properties/id"
+            },
+            "username": {
+              "examples": "[AHarrison]",
+              "type": "string",
+              "title": "Username",
+              "$id": "/properties/username"
+            },
+            "full_name": {
+              "examples": ["Ashley Harrison"],
+              "type": "string",
+              "title": "Full name",
+              "$id": "/properties/full_name"
+            },
+            "phone_number": {
+              "examples": ["123-123-1234"],
+              "type": "string",
+              "title": "Phone number",
+              "$id": "/properties/phone_number"
+            },
+            "email_address": {
+              "examples": "[\"aharrison",
+              "type": "string",
+              "title": "email_address",
+              "$id": "/properties/email_address"
+            }
+          }
+        }
+      }
+    },
+    "type": "object"
+  }
+}
