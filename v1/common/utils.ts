@@ -1,7 +1,10 @@
 import axios from "axios";
 import * as base64 from "base-64";
 import * as R from "ramda";
+import { createT, ExecuteInfo } from "../actions/create-group-name";
 import { errorCatches } from "../common/errors";
+import { CreateUserGroup, UserGroups } from "./type";
+const jsonxml = require("jsontoxml");
 
 const encodeCredentials = (username: string, password: string) =>
   R.compose(
@@ -25,9 +28,13 @@ interface inputPattern {
 export const postCall = (
   { domain, username, password }: inputPattern,
   uri: string,
-  body: string
+  body: UserGroups
 ) =>
-  axios.post(`${domain}/JSSResource/${uri}`, body, header(username, password));
+  axios.post(
+    `${domain}/JSSResource/${uri}`,
+    jsonxml(body),
+    header(username, password)
+  );
 export const putCall = (
   { domain, username, password }: inputPattern,
   uri: string,
@@ -39,7 +46,7 @@ export const getCall = (
   name: string,
   uri: string
 ) =>
-  axios.get(`${domain}/JSSResource/${uri}/${name}`, header(username, password));
+  axios.get(`${domain}/JSSResource/${uri}${name}`, header(username, password));
 export const deleteCall = (
   { domain, username, password }: inputPattern,
   name: string,
@@ -49,6 +56,9 @@ export const deleteCall = (
     `${domain}/JSSResource/${uri}/${name}`,
     header(username, password)
   );
+let addSlash = function (name: string): string {
+  return (name = name && name.length ? `/${name}` : name);
+};
 export const getExecuteAction = async (
   input: any,
   name: string,
@@ -60,9 +70,11 @@ export const getExecuteAction = async (
     let datalist: any;
     switch (method) {
       case "get":
-        datalist = await getCall(input.auth, name, uri);
+        datalist = await getCall(input.auth, addSlash(name), uri);
+        break;
       case "delete":
         datalist = await deleteCall(input.auth, name, uri);
+        break;
     }
     let list = datalist.data;
     switch (method) {
@@ -76,11 +88,9 @@ export const getExecuteAction = async (
   }
 };
 export const postExecuteAction = async (
-  input: any,
+  { input, uri, body }: createT,
   error: any,
-  uri: string,
-  method: string,
-  body: any
+  method: string
 ) => {
   try {
     switch (method) {

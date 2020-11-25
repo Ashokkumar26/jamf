@@ -1,7 +1,6 @@
 import { postExecuteAction } from "../common/utils";
 import { errors } from "../common/errors";
-import { AuthT, CreateUserGroup } from "../common/type";
-import jsonxml from "jsontoxml";
+import { AuthT, CreateUserGroup, action1, UserGroups } from "../common/type";
 
 export const id = "create group name";
 export const input = [
@@ -199,10 +198,15 @@ const output = {
   type: "object",
 };
 
-type ExecuteInfo = AuthT & CreateUserGroup;
+export type ExecuteInfo = AuthT & CreateUserGroup;
+export interface createT {
+  input: ExecuteInfo;
+  uri: "usergroups";
+  body: UserGroups;
+}
 
 export const execute = (input: ExecuteInfo) => {
-  let user_group = {
+  let user_group: UserGroups = {
     user_group: {
       name: input.name,
       is_smart: input.is_smart == "true",
@@ -210,12 +214,15 @@ export const execute = (input: ExecuteInfo) => {
       users: input.username ? [{ username: input.username }] : [],
     },
   };
-  type action = "post" | "put";
   let error = errors.GROUP_NAME_INVALID;
-  let uri = "usergroups";
-  let method: action = "post";
+  let method: action1 = "post";
+  let createGroup: createT = {
+    input,
+    uri: "usergroups",
+    body: user_group,
+  };
 
-  return postExecuteAction(input, error, uri, method, jsonxml(user_group));
+  return postExecuteAction(createGroup, error, method);
 };
 
 execute({

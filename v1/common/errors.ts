@@ -1,4 +1,4 @@
-import { makeError } from "@skitter/automation-utils";
+const { makeError } = require("@skitter/automation-utils");
 
 export const errors = {
   GROUPNAME_NOT_EXIST: {
@@ -59,17 +59,19 @@ export const errorCatches = (err: any, notExistName: any) => {
           errors.INVALID_DOMAIN_URL.code,
           errors.INVALID_DOMAIN_URL.message
         );
-      case 404:
-        throw makeError(notExistName.code, notExistName.message);
-      case 409:
-        throw makeError(notExistName.code, notExistName.message);
-      case 400:
-        throw makeError(notExistName.code, notExistName.message);
+      // case 404:
+      //   throw makeError(notExistName.code, notExistName.message);
+      // case 409:
+      //   throw makeError(notExistName.code, notExistName.message);
+      // case 400:
+      //   throw makeError(notExistName.code, notExistName.message);
       case 401:
         throw makeError(
           errors.INVALID_CREDENTIALS.code,
           errors.INVALID_CREDENTIALS.message
         );
+      // default:
+      //   throw makeError(notExistName.code, notExistName.message);
     }
   }
   throw err;

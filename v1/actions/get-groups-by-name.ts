@@ -1,6 +1,6 @@
 import { getExecuteAction } from "../common/utils";
 import { errors } from "../common/errors";
-import { AuthT, UserGroupByName } from "../common/type";
+import { AuthT, action2 } from "../common/type";
 
 export const name = "Get User Group";
 
@@ -114,7 +114,7 @@ type ExecuteInfo = AuthT & { groupName: string };
 export const execute = (input: ExecuteInfo) => {
   let error = errors.GROUPNAME_NOT_EXIST;
   let uri = "usergroups/name";
-  let method = "get";
+  let method: action2 = "get";
   return getExecuteAction(input, input.groupName, error, uri, method);
 };
 execute({

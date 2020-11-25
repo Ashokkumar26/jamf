@@ -52,7 +52,6 @@ var axios_1 = require("axios");
 var base64 = require("base-64");
 var R = require("ramda");
 var errors_1 = require("../common/errors");
-// var convert = require("xml-js");
 var encodeCredentials = function (username, password) {
     return R.compose(R.concat("Basic "), base64.encode, R.join(":"))([username, password]);
 };
@@ -73,11 +72,14 @@ exports.putCall = function (_a, uri, body) {
 };
 exports.getCall = function (_a, name, uri) {
     var domain = _a.domain, username = _a.username, password = _a.password;
-    return axios_1["default"].get(domain + "/JSSResource/" + uri + "/" + name, header(username, password));
+    return axios_1["default"].get(domain + "/JSSResource/" + uri + name, header(username, password));
 };
 exports.deleteCall = function (_a, name, uri) {
     var domain = _a.domain, username = _a.username, password = _a.password;
     return axios_1["default"]["delete"](domain + "/JSSResource/" + uri + "/" + name, header(username, password));
+};
+var addSlash = function (name) {
+    return (name = name && name.length ? "/" + name : name);
 };
 exports.getExecuteAction = function (input, name, error, uri, method) { return __awaiter(void 0, void 0, void 0, function () {
     var datalist, _a, list, err_1;
@@ -92,14 +94,14 @@ exports.getExecuteAction = function (input, name, error, uri, method) { return _
                     case "delete": return [3 /*break*/, 3];
                 }
                 return [3 /*break*/, 5];
-            case 1: return [4 /*yield*/, exports.getCall(input.auth, name, uri)];
+            case 1: return [4 /*yield*/, exports.getCall(input.auth, addSlash(name), uri)];
             case 2:
                 datalist = _b.sent();
-                _b.label = 3;
+                return [3 /*break*/, 5];
             case 3: return [4 /*yield*/, exports.deleteCall(input.auth, name, uri)];
             case 4:
                 datalist = _b.sent();
-                _b.label = 5;
+                return [3 /*break*/, 5];
             case 5:
                 list = datalist.data;
                 switch (method) {

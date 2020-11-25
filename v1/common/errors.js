@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 exports.errorCatches = exports.errors = void 0;
-var automation_utils_1 = require("@skitter/automation-utils");
+var makeError = require("@skitter/automation-utils").makeError;
 exports.errors = {
     GROUPNAME_NOT_EXIST: {
         code: "GROUPNAME_NOT_EXIST",
@@ -37,25 +37,27 @@ exports.errorCatches = function (err, notExistName) {
     if (error == undefined) {
         switch (err.code) {
             case "ENOTFOUND":
-                throw automation_utils_1.makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
+                throw makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
             case "ETIMEDOUT":
-                throw automation_utils_1.makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
+                throw makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
             case "ECONNREFUSED":
-                throw automation_utils_1.makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
+                throw makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
         }
     }
     if (error !== undefined) {
         switch (error.status) {
             case 403:
-                throw automation_utils_1.makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
-            case 404:
-                throw automation_utils_1.makeError(notExistName.code, notExistName.message);
-            case 409:
-                throw automation_utils_1.makeError(notExistName.code, notExistName.message);
-            case 400:
-                throw automation_utils_1.makeError(notExistName.code, notExistName.message);
+                throw makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
+            // case 404:
+            //   throw makeError(notExistName.code, notExistName.message);
+            // case 409:
+            //   throw makeError(notExistName.code, notExistName.message);
+            // case 400:
+            //   throw makeError(notExistName.code, notExistName.message);
             case 401:
-                throw automation_utils_1.makeError(exports.errors.INVALID_CREDENTIALS.code, exports.errors.INVALID_CREDENTIALS.message);
+                throw makeError(exports.errors.INVALID_CREDENTIALS.code, exports.errors.INVALID_CREDENTIALS.message);
+            // default:
+            //   throw makeError(notExistName.code, notExistName.message);
         }
     }
     throw err;

@@ -1,6 +1,6 @@
 import { getExecuteAction } from "../common/utils";
 import { errors } from "../common/errors";
-import { AuthT } from "../common/type";
+import { AuthT, action2 } from "../common/type";
 
 export const name = "Delete User";
 
@@ -31,7 +31,7 @@ type ExecuteInfo = AuthT & { name: string };
 export const execute = (input: ExecuteInfo) => {
   let error = errors.NAME_NOT_FOUND;
   let uri = "users/name";
-  let method = "delete";
+  let method: action2 = "delete";
   return getExecuteAction(input, input.name, error, uri, method);
 };
 

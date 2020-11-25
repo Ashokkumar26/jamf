@@ -5,6 +5,8 @@ export type AuthT = {
     password: string;
   };
 };
+export type action1 = "post" | "put";
+export type action2 = "get" | "delete";
 
 export interface GetMobileDevices {
   mobile_devices: MobileDevice[];
@@ -224,4 +226,12 @@ export interface CreateUserGroup {
   is_smart: string;
   is_notify_on_change?: string;
   username?: string;
+}
+export interface UserGroups {
+  user_group: {
+    name: string;
+    is_smart: boolean;
+    is_notify_on_change: "true" | "false";
+    users: { username: string }[];
+  };
 }

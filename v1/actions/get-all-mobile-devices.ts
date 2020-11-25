@@ -1,6 +1,6 @@
-import { getAllMobileDevices } from "../common/utils";
-import { errorCatches } from "../common/errors";
-import { AuthT } from "../common/type";
+import { getExecuteAction } from "../common/utils";
+import { errors } from "../common/errors";
+import { AuthT, action2 } from "../common/type";
 export const input = [
   {
     key: "username",
@@ -119,13 +119,11 @@ export const output = {
 type ExecuteInfo = AuthT;
 
 export const execute = async (input: ExecuteInfo) => {
-  try {
-    let dataList = await getAllMobileDevices(input.auth);
-    let list = dataList.data;
-    return { ...list, action_success: true };
-  } catch (err) {
-    throw errorCatches(err, null);
-  }
+  let error = errors.NAME_NOT_FOUND;
+  let uri = "mobiledevices";
+  let method: action2 = "get";
+  let name = "";
+  return getExecuteAction(input, name, error, uri, method);
 };
 execute({
   auth: {

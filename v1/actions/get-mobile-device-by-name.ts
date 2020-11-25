@@ -1,6 +1,6 @@
 import { getExecuteAction } from "../common/utils";
 import { errors } from "../common/errors";
-import { AuthT } from "../common/type";
+import { AuthT, action2 } from "../common/type";
 
 export const name = "Get Mobile device by name";
 
@@ -1083,7 +1083,7 @@ type ExecuteInfo = AuthT & { deviceName: string };
 export const execute = (input: ExecuteInfo) => {
   let error = errors.DEVICE_NAME_NOT_EXIST;
   let uri = "mobiledevices/name";
-  let method = "get";
+  let method: action2 = "get";
   return getExecuteAction(input, input.deviceName, error, uri, method);
 };
 execute({
