@@ -35,13 +35,8 @@ exports.errors = {
 exports.errorCatches = function (err, notExistName) {
     var error = err.response;
     if (error == undefined) {
-        switch (err.code) {
-            case "ENOTFOUND":
-                throw makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
-            case "ETIMEDOUT":
-                throw makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
-            case "ECONNREFUSED":
-                throw makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
+        if (err.code === "ENOTFOUND" || "ETIMEDOUT" || "ECONNREFUSED") {
+            throw makeError(exports.errors.INVALID_DOMAIN_URL.code, exports.errors.INVALID_DOMAIN_URL.message);
         }
     }
     if (error !== undefined) {

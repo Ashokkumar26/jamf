@@ -117,13 +117,19 @@ export const output = {
   title: "MobileDevices",
 };
 type ExecuteInfo = AuthT;
-
+export type getAllMobile = {
+  input: ExecuteInfo;
+  uri: "mobiledevices";
+};
 export const execute = async (input: ExecuteInfo) => {
   let error = errors.NAME_NOT_FOUND;
-  let uri = "mobiledevices";
   let method: action2 = "get";
   let name = "";
-  return getExecuteAction(input, name, error, uri, method);
+  let getAllMobileDevice: getAllMobile = {
+    input,
+    uri: "mobiledevices",
+  };
+  return getExecuteAction(getAllMobileDevice, name, error, method);
 };
 execute({
   auth: {

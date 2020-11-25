@@ -34,22 +34,11 @@ export const errors = {
 export const errorCatches = (err: any, notExistName: any) => {
   let error = err.response;
   if (error == undefined) {
-    switch (err.code) {
-      case "ENOTFOUND":
-        throw makeError(
-          errors.INVALID_DOMAIN_URL.code,
-          errors.INVALID_DOMAIN_URL.message
-        );
-      case "ETIMEDOUT":
-        throw makeError(
-          errors.INVALID_DOMAIN_URL.code,
-          errors.INVALID_DOMAIN_URL.message
-        );
-      case "ECONNREFUSED":
-        throw makeError(
-          errors.INVALID_DOMAIN_URL.code,
-          errors.INVALID_DOMAIN_URL.message
-        );
+    if (err.code === "ENOTFOUND" || "ETIMEDOUT" || "ECONNREFUSED") {
+      throw makeError(
+        errors.INVALID_DOMAIN_URL.code,
+        errors.INVALID_DOMAIN_URL.message
+      );
     }
   }
   if (error !== undefined) {
@@ -59,12 +48,12 @@ export const errorCatches = (err: any, notExistName: any) => {
           errors.INVALID_DOMAIN_URL.code,
           errors.INVALID_DOMAIN_URL.message
         );
-      // case 404:
-      //   throw makeError(notExistName.code, notExistName.message);
-      // case 409:
-      //   throw makeError(notExistName.code, notExistName.message);
-      // case 400:
-      //   throw makeError(notExistName.code, notExistName.message);
+      case 404:
+        throw makeError(notExistName.code, notExistName.message);
+      case 409:
+        throw makeError(notExistName.code, notExistName.message);
+      case 400:
+        throw makeError(notExistName.code, notExistName.message);
       case 401:
         throw makeError(
           errors.INVALID_CREDENTIALS.code,

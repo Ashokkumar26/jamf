@@ -2,6 +2,10 @@ import axios from "axios";
 import * as base64 from "base-64";
 import * as R from "ramda";
 import { createT, ExecuteInfo } from "../actions/create-group-name";
+import { deleteUser } from "../actions/delete-user-by-name";
+import { getAllMobile } from "../actions/get-all-mobile-devices";
+import { getGroupName } from "../actions/get-groups-by-name";
+import { mobileDeviceName } from "../actions/get-mobile-device-by-name";
 import { errorCatches } from "../common/errors";
 import { CreateUserGroup, UserGroups } from "./type";
 const jsonxml = require("jsontoxml");
@@ -57,13 +61,12 @@ export const deleteCall = (
     header(username, password)
   );
 let addSlash = function (name: string): string {
-  return (name = name && name.length ? `/${name}` : name);
+  return (name = name ? (name.length ? `/${name}` : name) : "");
 };
 export const getExecuteAction = async (
-  input: any,
+  { input, uri }: mobileDeviceName | getAllMobile | getGroupName | deleteUser,
   name: string,
   error: any,
-  uri: string,
   method: string
 ) => {
   try {
@@ -96,11 +99,13 @@ export const postExecuteAction = async (
     switch (method) {
       case "post":
         await postCall(input.auth, uri, body);
+        break;
       case "put":
         await putCall(input.auth, uri, body);
+        break;
     }
     let url = `${uri}/name`;
-    return await getExecuteAction(input, input.name, error, url, "get");
+    return await getExecuteAction({ input, url }, input.name, error, "get");
   } catch (err) {
     throw errorCatches(err, error);
   }

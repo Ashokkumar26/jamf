@@ -3,7 +3,6 @@ exports.__esModule = true;
 exports.execute = exports.input = exports.id = void 0;
 var utils_1 = require("../common/utils");
 var errors_1 = require("../common/errors");
-var jsontoxml_1 = require("jsontoxml");
 exports.id = "create group name";
 exports.input = [
     {
@@ -209,12 +208,16 @@ exports.execute = function (input) {
         }
     };
     var error = errors_1.errors.GROUP_NAME_INVALID;
-    var uri = "usergroups";
     var method = "post";
-    return utils_1.postExecuteAction(input, error, uri, method, jsontoxml_1["default"](user_group));
+    var createGroup = {
+        input: input,
+        uri: "usergroups",
+        body: user_group
+    };
+    return utils_1.postExecuteAction(createGroup, error, method);
 };
 exports.execute({
-    name: "postmanAF",
+    name: "postAGX",
     is_smart: "true",
     is_notify_on_change: "false",
     username: "ashok",

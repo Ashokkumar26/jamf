@@ -52,6 +52,7 @@ var axios_1 = require("axios");
 var base64 = require("base-64");
 var R = require("ramda");
 var errors_1 = require("../common/errors");
+var jsonxml = require("jsontoxml");
 var encodeCredentials = function (username, password) {
     return R.compose(R.concat("Basic "), base64.encode, R.join(":"))([username, password]);
 };
@@ -64,7 +65,7 @@ var header = function (username, password) { return ({
 }); };
 exports.postCall = function (_a, uri, body) {
     var domain = _a.domain, username = _a.username, password = _a.password;
-    return axios_1["default"].post(domain + "/JSSResource/" + uri, body, header(username, password));
+    return axios_1["default"].post(domain + "/JSSResource/" + uri, jsonxml(body), header(username, password));
 };
 exports.putCall = function (_a, uri, body) {
     var domain = _a.domain, username = _a.username, password = _a.password;
@@ -79,7 +80,7 @@ exports.deleteCall = function (_a, name, uri) {
     return axios_1["default"]["delete"](domain + "/JSSResource/" + uri + "/" + name, header(username, password));
 };
 var addSlash = function (name) {
-    return (name = name && name.length ? "/" + name : name);
+    return (name = name ? (name.length ? "/" + name : name) : "");
 };
 exports.getExecuteAction = function (input, name, error, uri, method) { return __awaiter(void 0, void 0, void 0, function () {
     var datalist, _a, list, err_1;
@@ -118,34 +119,37 @@ exports.getExecuteAction = function (input, name, error, uri, method) { return _
         }
     });
 }); };
-exports.postExecuteAction = function (input, error, uri, method, body) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, url, err_2;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 7, , 8]);
-                _a = method;
-                switch (_a) {
-                    case "post": return [3 /*break*/, 1];
-                    case "put": return [3 /*break*/, 3];
-                }
-                return [3 /*break*/, 5];
-            case 1: return [4 /*yield*/, exports.postCall(input.auth, uri, body)];
-            case 2:
-                _b.sent();
-                _b.label = 3;
-            case 3: return [4 /*yield*/, exports.putCall(input.auth, uri, body)];
-            case 4:
-                _b.sent();
-                _b.label = 5;
-            case 5:
-                url = uri + "/name";
-                return [4 /*yield*/, exports.getExecuteAction(input, input.name, error, url, "get")];
-            case 6: return [2 /*return*/, _b.sent()];
-            case 7:
-                err_2 = _b.sent();
-                throw errors_1.errorCatches(err_2, error);
-            case 8: return [2 /*return*/];
-        }
+exports.postExecuteAction = function (_a, error, method) {
+    var input = _a.input, uri = _a.uri, body = _a.body;
+    return __awaiter(void 0, void 0, void 0, function () {
+        var _b, url, err_2;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0:
+                    _c.trys.push([0, 7, , 8]);
+                    _b = method;
+                    switch (_b) {
+                        case "post": return [3 /*break*/, 1];
+                        case "put": return [3 /*break*/, 3];
+                    }
+                    return [3 /*break*/, 5];
+                case 1: return [4 /*yield*/, exports.postCall(input.auth, uri, body)];
+                case 2:
+                    _c.sent();
+                    _c.label = 3;
+                case 3: return [4 /*yield*/, exports.putCall(input.auth, uri, body)];
+                case 4:
+                    _c.sent();
+                    _c.label = 5;
+                case 5:
+                    url = uri + "/name";
+                    return [4 /*yield*/, exports.getExecuteAction(input, input.name, error, url, "get")];
+                case 6: return [2 /*return*/, _c.sent()];
+                case 7:
+                    err_2 = _c.sent();
+                    throw errors_1.errorCatches(err_2, error);
+                case 8: return [2 /*return*/];
+            }
+        });
     });
-}); };
+};

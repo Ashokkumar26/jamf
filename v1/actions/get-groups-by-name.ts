@@ -110,12 +110,18 @@ export const output = {
 };
 
 type ExecuteInfo = AuthT & { groupName: string };
-
+export type getGroupName = {
+  input: ExecuteInfo;
+  uri: "usergroups/name";
+};
 export const execute = (input: ExecuteInfo) => {
   let error = errors.GROUPNAME_NOT_EXIST;
-  let uri = "usergroups/name";
   let method: action2 = "get";
-  return getExecuteAction(input, input.groupName, error, uri, method);
+  let getGroupsName: getGroupName = {
+    input,
+    uri: "usergroups/name",
+  };
+  return getExecuteAction(getGroupsName, input.groupName, error, method);
 };
 execute({
   auth: {

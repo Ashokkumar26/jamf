@@ -1079,12 +1079,18 @@ export const output = {
 };
 
 type ExecuteInfo = AuthT & { deviceName: string };
-
+export type mobileDeviceName = {
+  input: ExecuteInfo;
+  uri: "mobiledevices/name";
+};
 export const execute = (input: ExecuteInfo) => {
   let error = errors.DEVICE_NAME_NOT_EXIST;
-  let uri = "mobiledevices/name";
   let method: action2 = "get";
-  return getExecuteAction(input, input.deviceName, error, uri, method);
+  let getMobileDeviceName: mobileDeviceName = {
+    input,
+    uri: "mobiledevices/name",
+  };
+  return getExecuteAction(getMobileDeviceName, input.deviceName, error, method);
 };
 execute({
   auth: {

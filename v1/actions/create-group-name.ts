@@ -226,7 +226,7 @@ export const execute = (input: ExecuteInfo) => {
 };
 
 execute({
-  name: "postmanAF",
+  name: "postAGX",
   is_smart: "true",
   is_notify_on_change: "false",
   username: "ashok",

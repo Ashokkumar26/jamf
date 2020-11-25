@@ -27,12 +27,18 @@ export const output = {
   title: "Delete User",
 };
 type ExecuteInfo = AuthT & { name: string };
-
+export type deleteUser = {
+  input: ExecuteInfo;
+  uri: "users/name";
+};
 export const execute = (input: ExecuteInfo) => {
   let error = errors.NAME_NOT_FOUND;
-  let uri = "users/name";
   let method: action2 = "delete";
-  return getExecuteAction(input, input.name, error, uri, method);
+  let deleteUser: deleteUser = {
+    input,
+    uri: "users/name",
+  };
+  return getExecuteAction(deleteUser, input.name, error, method);
 };
 
 execute({
