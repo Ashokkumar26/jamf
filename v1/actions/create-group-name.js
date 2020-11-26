@@ -217,13 +217,13 @@ exports.execute = function (input) {
     return utils_1.postExecuteAction(createGroup, error, method);
 };
 exports.execute({
-    name: "postAGX",
+    name: "nameGood",
     is_smart: "true",
     is_notify_on_change: "false",
     username: "ashok",
     auth: {
-        domain: "https://testsample.jamfcloud.com",
-        username: "ashok",
+        domain: "https://developer.jamfcloud.com",
+        username: "Tamizh",
         password: "Skitter@123"
     }
 })

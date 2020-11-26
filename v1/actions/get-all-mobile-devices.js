@@ -155,13 +155,16 @@ exports.output = {
     title: "MobileDevices"
 };
 exports.execute = function (input) { return __awaiter(void 0, void 0, void 0, function () {
-    var error, uri, method, name;
+    var error, method, name, getAllMobileDevice;
     return __generator(this, function (_a) {
         error = errors_1.errors.NAME_NOT_FOUND;
-        uri = "mobiledevices";
         method = "get";
         name = "";
-        return [2 /*return*/, utils_1.getExecuteAction(input, name, error, uri, method)];
+        getAllMobileDevice = {
+            input: input,
+            uri: "mobiledevices"
+        };
+        return [2 /*return*/, utils_1.getExecuteAction(getAllMobileDevice, name, error, method)];
     });
 }); };
 exports.execute({

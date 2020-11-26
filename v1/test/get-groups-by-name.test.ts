@@ -3,7 +3,7 @@
  */
 
 import { execute } from "../actions/get-groups-by-name";
-import { makeError } from "@skitter/automation-utils";
+const { makeError } = require("@skitter/automation-utils");
 import { errors } from "../common/errors";
 
 describe("Get Groups by Name", () => {

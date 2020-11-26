@@ -39,11 +39,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var get_groups_by_name_1 = require("../actions/get-groups-by-name");
+var delete_user_by_name_1 = require("../actions/delete-user-by-name");
 var makeError = require("@skitter/automation-utils").makeError;
 var errors_1 = require("../common/errors");
-describe("Get Groups by Name", function () {
-    it("Get Groups by Name", function () { return __awaiter(void 0, void 0, void 0, function () {
+describe("Delete User by Name", function () {
+    it("Delete User by Name", function () { return __awaiter(void 0, void 0, void 0, function () {
         var input, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -54,9 +54,9 @@ describe("Get Groups by Name", function () {
                             password: "Skitter@123",
                             domain: "https://testsample.jamfcloud.com"
                         },
-                        groupName: "Hello"
+                        name: "AHarrison"
                     };
-                    return [4 /*yield*/, get_groups_by_name_1.execute(input)];
+                    return [4 /*yield*/, delete_user_by_name_1.execute(input)];
                 case 1:
                     res = _a.sent();
                     expect(res.action_success).toBe(true);
@@ -69,19 +69,19 @@ describe("Get Groups by Name", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = makeError(errors_1.errors.GROUPNAME_NOT_EXIST.code, errors_1.errors.GROUPNAME_NOT_EXIST.message);
+                    error = makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
                     input = {
                         auth: {
                             username: "ashok",
                             password: "Skitter@123",
-                            domain: "https://testsample.jamfcloud.com"
+                            domain: "http://testsample.jamfcloud.com"
                         },
-                        groupName: "Hell"
+                        name: "Tamizh"
                     };
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, get_groups_by_name_1.execute(input)];
+                    return [4 /*yield*/, delete_user_by_name_1.execute(input)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];
@@ -105,12 +105,12 @@ describe("Get Groups by Name", function () {
                             password: "Skitter@123",
                             domain: "https://testsample.jamfcloud.com"
                         },
-                        groupName: "Hello"
+                        name: "Hello"
                     };
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, get_groups_by_name_1.execute(input)];
+                    return [4 /*yield*/, delete_user_by_name_1.execute(input)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];
@@ -134,12 +134,12 @@ describe("Get Groups by Name", function () {
                             password: "Skitter@123",
                             domain: "https://tessample.jamfcloud.com"
                         },
-                        groupName: "Hello"
+                        name: "Hello"
                     };
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, get_groups_by_name_1.execute(input)];
+                    return [4 /*yield*/, delete_user_by_name_1.execute(input)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];
@@ -163,12 +163,12 @@ describe("Get Groups by Name", function () {
                             password: "Skitter@123",
                             domain: "https://testsample.jalod.com"
                         },
-                        groupName: "Hello"
+                        name: "Hello"
                     };
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, get_groups_by_name_1.execute(input)];
+                    return [4 /*yield*/, delete_user_by_name_1.execute(input)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];
@@ -192,12 +192,12 @@ describe("Get Groups by Name", function () {
                             password: "Skitter@123",
                             domain: ""
                         },
-                        groupName: "Hello"
+                        name: "Hello"
                     };
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, get_groups_by_name_1.execute(input)];
+                    return [4 /*yield*/, delete_user_by_name_1.execute(input)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];
@@ -209,24 +209,24 @@ describe("Get Groups by Name", function () {
             }
         });
     }); }, 50000);
-    it("Group Name not Exist", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("User Name Not Found", function () { return __awaiter(void 0, void 0, void 0, function () {
         var error, input, myerror_6;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = makeError(errors_1.errors.GROUPNAME_NOT_EXIST.code, errors_1.errors.GROUPNAME_NOT_EXIST.message);
+                    error = makeError(errors_1.errors.NAME_NOT_FOUND.code, errors_1.errors.NAME_NOT_FOUND.message);
                     input = {
                         auth: {
                             username: "ashok",
                             password: "Skitter@123",
                             domain: "https://testsample.jamfcloud.com"
                         },
-                        groupName: ""
+                        name: ""
                     };
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, get_groups_by_name_1.execute(input)];
+                    return [4 /*yield*/, delete_user_by_name_1.execute(input)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];
@@ -238,24 +238,24 @@ describe("Get Groups by Name", function () {
             }
         });
     }); }, 50000);
-    it("Group Name not Exist", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("User Name Not Found", function () { return __awaiter(void 0, void 0, void 0, function () {
         var error, input, myerror_7;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = makeError(errors_1.errors.GROUPNAME_NOT_EXIST.code, errors_1.errors.GROUPNAME_NOT_EXIST.message);
+                    error = makeError(errors_1.errors.NAME_NOT_FOUND.code, errors_1.errors.NAME_NOT_FOUND.message);
                     input = {
                         auth: {
                             username: "ashok",
                             password: "Skitter@123",
                             domain: "https://testsample.jamfcloud.com"
                         },
-                        groupName: "$Jn#4"
+                        name: "$Jn#4"
                     };
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, get_groups_by_name_1.execute(input)];
+                    return [4 /*yield*/, delete_user_by_name_1.execute(input)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];

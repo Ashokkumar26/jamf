@@ -109,9 +109,12 @@ exports.output = {
 };
 exports.execute = function (input) {
     var error = errors_1.errors.GROUPNAME_NOT_EXIST;
-    var uri = "usergroups/name";
     var method = "get";
-    return utils_1.executeAction(input.auth, input.groupName, error, utils_1.apiCall, uri, method);
+    var getGroupsName = {
+        input: input,
+        uri: "usergroups/name"
+    };
+    return utils_1.getExecuteAction(getGroupsName, input.groupName, error, method);
 };
 exports.execute({
     auth: {

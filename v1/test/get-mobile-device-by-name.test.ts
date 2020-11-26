@@ -3,7 +3,7 @@
  */
 
 import { execute } from "../actions/get-mobile-device-by-name";
-import { makeError } from "@skitter/automation-utils";
+const { makeError } = require("@skitter/automation-utils");
 import { errors } from "../common/errors";
 
 describe("Get Mobile Device by Name", () => {

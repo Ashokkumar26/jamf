@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var create_group_name_1 = require("../actions/create-group-name");
-var automation_utils_1 = require("@skitter/automation-utils");
+var makeError = require("@skitter/automation-utils").makeError;
 var errors_1 = require("../common/errors");
 describe("Create Group Name", function () {
     it("Create Group Name", function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -46,15 +46,15 @@ describe("Create Group Name", function () {
             switch (_a.label) {
                 case 0:
                     input = {
-                        name: "testing",
+                        name: "helloworld",
                         is_smart: "true",
                         is_notify_on_change: "false",
-                        site_name: "ashok",
+                        site_name: "Tamizh",
                         username: "sri",
                         auth: {
-                            username: "ashok",
+                            username: "Tamizh",
                             password: "Skitter@123",
-                            domain: "https://testsample.jamfcloud.com"
+                            domain: "https://developer.jamfcloud.com"
                         }
                     };
                     return [4 /*yield*/, create_group_name_1.execute(input)];
@@ -70,17 +70,17 @@ describe("Create Group Name", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = automation_utils_1.makeError(errors_1.errors.INVALID_CREDENTIALS.code, errors_1.errors.INVALID_CREDENTIALS.message);
+                    error = makeError(errors_1.errors.INVALID_CREDENTIALS.code, errors_1.errors.INVALID_CREDENTIALS.message);
                     input = {
                         name: "testing",
                         is_smart: "true",
                         is_notify_on_change: "false",
-                        site_name: "ashok",
+                        site_name: "Tamizh",
                         username: "sri",
                         auth: {
                             username: "asok",
                             password: "Skitter@123",
-                            domain: "https://testsample.jamfcloud.com"
+                            domain: "https://developer.jamfcloud.com"
                         }
                     };
                     _a.label = 1;
@@ -103,15 +103,15 @@ describe("Create Group Name", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = automation_utils_1.makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
+                    error = makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
                     input = {
                         name: "testing",
                         is_smart: "true",
                         is_notify_on_change: "false",
-                        site_name: "ashok",
+                        site_name: "Tamizh",
                         username: "sri",
                         auth: {
-                            username: "ashok",
+                            username: "Tamizh",
                             password: "Skitter@123",
                             domain: ""
                         }
@@ -136,17 +136,17 @@ describe("Create Group Name", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = automation_utils_1.makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
+                    error = makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
                     input = {
                         name: "testing",
                         is_smart: "true",
                         is_notify_on_change: "false",
-                        site_name: "ashok",
+                        site_name: "Tamizh",
                         username: "sri",
                         auth: {
-                            username: "ashok",
+                            username: "Tamizh",
                             password: "Skitter@123",
-                            domain: "https://testsample.jaclod.com"
+                            domain: "https://developer.jaclod.com"
                         }
                     };
                     _a.label = 1;
@@ -164,22 +164,22 @@ describe("Create Group Name", function () {
             }
         });
     }); }, 50000);
-    it("Ivalid Group Name", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("User Group Name Required", function () { return __awaiter(void 0, void 0, void 0, function () {
         var error, input, myerror_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = automation_utils_1.makeError(errors_1.errors.GROUP_NAME_INVALID.code, errors_1.errors.GROUP_NAME_INVALID.message);
+                    error = makeError(errors_1.errors.GROUP_NAME_REQUIRED.code, errors_1.errors.GROUP_NAME_REQUIRED.message);
                     input = {
                         name: "",
                         is_smart: "true",
                         is_notify_on_change: "false",
-                        site_name: "ashok",
+                        site_name: "Tamizh",
                         username: "sri",
                         auth: {
-                            username: "ashok",
+                            username: "Tamizh",
                             password: "Skitter@123",
-                            domain: "https://testsample.jamfcloud.com"
+                            domain: "https://developer.jamfcloud.com"
                         }
                     };
                     _a.label = 1;
@@ -202,17 +202,17 @@ describe("Create Group Name", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = automation_utils_1.makeError(errors_1.errors.GROUP_NAME_INVALID.code, errors_1.errors.GROUP_NAME_INVALID.message);
+                    error = makeError(errors_1.errors.GROUP_NAME_INVALID.code, errors_1.errors.GROUP_NAME_INVALID.message);
                     input = {
-                        name: "postmanA",
+                        name: "nameGood",
                         is_smart: "true",
                         is_notify_on_change: "false",
-                        site_name: "ashok",
+                        site_name: "Tamizh",
                         username: "sri",
                         auth: {
-                            username: "ashok",
+                            username: "Tamizh",
                             password: "Skitter@123",
-                            domain: "https://testsample.jamfcloud.com"
+                            domain: "https://developer.jamfcloud.com"
                         }
                     };
                     _a.label = 1;

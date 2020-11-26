@@ -3,7 +3,7 @@
  */
 
 import { execute } from "../actions/delete-user-by-name";
-import { makeError } from "@skitter/automation-utils";
+const { makeError } = require("@skitter/automation-utils");
 import { errors } from "../common/errors";
 
 describe("Delete User by Name", () => {
@@ -14,23 +14,23 @@ describe("Delete User by Name", () => {
         password: "Skitter@123",
         domain: "https://testsample.jamfcloud.com",
       },
-      name: "12345",
+      name: "AHarrison",
     };
     const res = await execute(input);
     expect(res.action_success).toBe(true);
   }, 5000);
   it("Ivalid URL", async () => {
     const error = makeError(
-      errors.GROUPNAME_NOT_EXIST.code,
-      errors.GROUPNAME_NOT_EXIST.message
+      errors.INVALID_DOMAIN_URL.code,
+      errors.INVALID_DOMAIN_URL.message
     );
     const input = {
       auth: {
         username: "ashok",
         password: "Skitter@123",
-        domain: "https://testsample.jamfcloud.com",
+        domain: "http://testsample.jamfcloud.com",
       },
-      name: "Hell",
+      name: "Tamizh",
     };
     try {
       await execute(input);

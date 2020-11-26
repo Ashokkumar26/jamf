@@ -7,7 +7,7 @@ import { getAllMobile } from "../actions/get-all-mobile-devices";
 import { getGroupName } from "../actions/get-groups-by-name";
 import { mobileDeviceName } from "../actions/get-mobile-device-by-name";
 import { errorCatches } from "../common/errors";
-import { CreateUserGroup, UserGroups } from "./type";
+import { UserGroups } from "./type";
 const jsonxml = require("jsontoxml");
 
 const encodeCredentials = (username: string, password: string) =>
@@ -64,7 +64,15 @@ let addSlash = function (name: string): string {
   return (name = name ? (name.length ? `/${name}` : name) : "");
 };
 export const getExecuteAction = async (
-  { input, uri }: mobileDeviceName | getAllMobile | getGroupName | deleteUser,
+  {
+    input,
+    uri,
+  }:
+    | mobileDeviceName
+    | getAllMobile
+    | getGroupName
+    | deleteUser
+    | postExecution,
   name: string,
   error: any,
   method: string
@@ -104,9 +112,16 @@ export const postExecuteAction = async (
         await putCall(input.auth, uri, body);
         break;
     }
-    let url = `${uri}/name`;
-    return await getExecuteAction({ input, url }, input.name, error, "get");
+    let postmanExecute: postExecution = {
+      input,
+      uri: `${uri}/name`,
+    };
+    return await getExecuteAction(postmanExecute, input.name, error, "get");
   } catch (err) {
     throw errorCatches(err, error);
   }
+};
+export type postExecution = {
+  input: ExecuteInfo;
+  uri: string;
 };

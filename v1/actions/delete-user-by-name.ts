@@ -41,17 +41,17 @@ export const execute = (input: ExecuteInfo) => {
   return getExecuteAction(deleteUser, input.name, error, method);
 };
 
-execute({
-  auth: {
-    domain: "https://testsample.jamfcloud.com",
-    username: "ashok",
-    password: "Skitter@123",
-  },
-  name: "13",
-})
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// execute({
+//   auth: {
+//     domain: "https://testsample.jamfcloud.com",
+//     username: "ashok",
+//     password: "Skitter@123",
+//   },
+//   name: "13",
+// })
+//   .then((res) => {
+//     console.log(res);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });

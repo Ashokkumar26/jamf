@@ -82,47 +82,50 @@ exports.deleteCall = function (_a, name, uri) {
 var addSlash = function (name) {
     return (name = name ? (name.length ? "/" + name : name) : "");
 };
-exports.getExecuteAction = function (input, name, error, uri, method) { return __awaiter(void 0, void 0, void 0, function () {
-    var datalist, _a, list, err_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 6, , 7]);
-                datalist = void 0;
-                _a = method;
-                switch (_a) {
-                    case "get": return [3 /*break*/, 1];
-                    case "delete": return [3 /*break*/, 3];
-                }
-                return [3 /*break*/, 5];
-            case 1: return [4 /*yield*/, exports.getCall(input.auth, addSlash(name), uri)];
-            case 2:
-                datalist = _b.sent();
-                return [3 /*break*/, 5];
-            case 3: return [4 /*yield*/, exports.deleteCall(input.auth, name, uri)];
-            case 4:
-                datalist = _b.sent();
-                return [3 /*break*/, 5];
-            case 5:
-                list = datalist.data;
-                switch (method) {
-                    case "delete":
-                        return [2 /*return*/, { action_success: true }];
-                    case "get":
-                        return [2 /*return*/, __assign(__assign({}, list), { action_success: true })];
-                }
-                return [3 /*break*/, 7];
-            case 6:
-                err_1 = _b.sent();
-                throw errors_1.errorCatches(err_1, error);
-            case 7: return [2 /*return*/];
-        }
+exports.getExecuteAction = function (_a, name, error, method) {
+    var input = _a.input, uri = _a.uri;
+    return __awaiter(void 0, void 0, void 0, function () {
+        var datalist, _b, list, err_1;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0:
+                    _c.trys.push([0, 6, , 7]);
+                    datalist = void 0;
+                    _b = method;
+                    switch (_b) {
+                        case "get": return [3 /*break*/, 1];
+                        case "delete": return [3 /*break*/, 3];
+                    }
+                    return [3 /*break*/, 5];
+                case 1: return [4 /*yield*/, exports.getCall(input.auth, addSlash(name), uri)];
+                case 2:
+                    datalist = _c.sent();
+                    return [3 /*break*/, 5];
+                case 3: return [4 /*yield*/, exports.deleteCall(input.auth, name, uri)];
+                case 4:
+                    datalist = _c.sent();
+                    return [3 /*break*/, 5];
+                case 5:
+                    list = datalist.data;
+                    switch (method) {
+                        case "delete":
+                            return [2 /*return*/, { action_success: true }];
+                        case "get":
+                            return [2 /*return*/, __assign(__assign({}, list), { action_success: true })];
+                    }
+                    return [3 /*break*/, 7];
+                case 6:
+                    err_1 = _c.sent();
+                    throw errors_1.errorCatches(err_1, error);
+                case 7: return [2 /*return*/];
+            }
+        });
     });
-}); };
+};
 exports.postExecuteAction = function (_a, error, method) {
     var input = _a.input, uri = _a.uri, body = _a.body;
     return __awaiter(void 0, void 0, void 0, function () {
-        var _b, url, err_2;
+        var _b, postmanExecute, err_2;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
@@ -136,14 +139,17 @@ exports.postExecuteAction = function (_a, error, method) {
                 case 1: return [4 /*yield*/, exports.postCall(input.auth, uri, body)];
                 case 2:
                     _c.sent();
-                    _c.label = 3;
+                    return [3 /*break*/, 5];
                 case 3: return [4 /*yield*/, exports.putCall(input.auth, uri, body)];
                 case 4:
                     _c.sent();
-                    _c.label = 5;
+                    return [3 /*break*/, 5];
                 case 5:
-                    url = uri + "/name";
-                    return [4 /*yield*/, exports.getExecuteAction(input, input.name, error, url, "get")];
+                    postmanExecute = {
+                        input: input,
+                        uri: uri + "/name"
+                    };
+                    return [4 /*yield*/, exports.getExecuteAction(postmanExecute, input.name, error, "get")];
                 case 6: return [2 /*return*/, _c.sent()];
                 case 7:
                     err_2 = _c.sent();

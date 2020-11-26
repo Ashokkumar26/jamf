@@ -1,19 +1,19 @@
 import { execute } from "../actions/create-group-name";
-import { makeError } from "@skitter/automation-utils";
+const { makeError } = require("@skitter/automation-utils");
 import { errors } from "../common/errors";
 
 describe("Create Group Name", () => {
   it("Create Group Name", async () => {
     const input = {
-      name: "testing",
+      name: "new world",
       is_smart: "true",
       is_notify_on_change: "false",
-      site_name: "ashok",
+      site_name: "Tamizh",
       username: "sri",
       auth: {
-        username: "ashok",
+        username: "Tamizh",
         password: "Skitter@123",
-        domain: "https://testsample.jamfcloud.com",
+        domain: "https://developer.jamfcloud.com",
       },
     };
     const res = await execute(input);
@@ -28,12 +28,12 @@ describe("Create Group Name", () => {
       name: "testing",
       is_smart: "true",
       is_notify_on_change: "false",
-      site_name: "ashok",
+      site_name: "Tamizh",
       username: "sri",
       auth: {
         username: "asok",
         password: "Skitter@123",
-        domain: "https://testsample.jamfcloud.com",
+        domain: "https://developer.jamfcloud.com",
       },
     };
     try {
@@ -51,10 +51,10 @@ describe("Create Group Name", () => {
       name: "testing",
       is_smart: "true",
       is_notify_on_change: "false",
-      site_name: "ashok",
+      site_name: "Tamizh",
       username: "sri",
       auth: {
-        username: "ashok",
+        username: "Tamizh",
         password: "Skitter@123",
         domain: "",
       },
@@ -74,12 +74,12 @@ describe("Create Group Name", () => {
       name: "testing",
       is_smart: "true",
       is_notify_on_change: "false",
-      site_name: "ashok",
+      site_name: "Tamizh",
       username: "sri",
       auth: {
-        username: "ashok",
+        username: "Tamizh",
         password: "Skitter@123",
-        domain: "https://testsample.jaclod.com",
+        domain: "https://developer.jaclod.com",
       },
     };
     try {
@@ -89,21 +89,21 @@ describe("Create Group Name", () => {
     }
   }, 50000);
 
-  it("Ivalid Group Name", async () => {
+  it("User Group Name Required", async () => {
     const error = makeError(
-      errors.GROUP_NAME_INVALID.code,
-      errors.GROUP_NAME_INVALID.message
+      errors.GROUP_NAME_REQUIRED.code,
+      errors.GROUP_NAME_REQUIRED.message
     );
     const input = {
       name: "",
       is_smart: "true",
       is_notify_on_change: "false",
-      site_name: "ashok",
+      site_name: "Tamizh",
       username: "sri",
       auth: {
-        username: "ashok",
+        username: "Tamizh",
         password: "Skitter@123",
-        domain: "https://testsample.jamfcloud.com",
+        domain: "https://developer.jamfcloud.com",
       },
     };
     try {
@@ -119,15 +119,15 @@ describe("Create Group Name", () => {
       errors.GROUP_NAME_INVALID.message
     );
     const input = {
-      name: "postmanA",
+      name: "nameGood",
       is_smart: "true",
       is_notify_on_change: "false",
-      site_name: "ashok",
+      site_name: "Tamizh",
       username: "sri",
       auth: {
-        username: "ashok",
+        username: "Tamizh",
         password: "Skitter@123",
-        domain: "https://testsample.jamfcloud.com",
+        domain: "https://developer.jamfcloud.com",
       },
     };
     try {

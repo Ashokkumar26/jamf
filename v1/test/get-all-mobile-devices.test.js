@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var get_all_mobile_devices_1 = require("../actions/get-all-mobile-devices");
-var automation_utils_1 = require("@skitter/automation-utils");
+var makeError = require("@skitter/automation-utils").makeError;
 var errors_1 = require("../common/errors");
 describe("Get All Mobile Devices", function () {
     it("Get All Mobile Devices", function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -65,7 +65,7 @@ describe("Get All Mobile Devices", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = automation_utils_1.makeError(errors_1.errors.INVALID_USER.code, errors_1.errors.INVALID_USER.message);
+                    error = makeError(errors_1.errors.INVALID_CREDENTIALS.code, errors_1.errors.INVALID_CREDENTIALS.message);
                     input = {
                         auth: {
                             username: "asok",
@@ -93,7 +93,7 @@ describe("Get All Mobile Devices", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = automation_utils_1.makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
+                    error = makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
                     input = {
                         auth: {
                             username: "ashok",
@@ -121,7 +121,7 @@ describe("Get All Mobile Devices", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    error = automation_utils_1.makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
+                    error = makeError(errors_1.errors.INVALID_DOMAIN_URL.code, errors_1.errors.INVALID_DOMAIN_URL.message);
                     input = {
                         auth: {
                             username: "ashok",

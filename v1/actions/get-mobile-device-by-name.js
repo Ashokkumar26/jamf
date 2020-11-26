@@ -1065,10 +1065,12 @@ exports.output = {
 };
 exports.execute = function (input) {
     var error = errors_1.errors.DEVICE_NAME_NOT_EXIST;
-    var deleteUser = utils_1.deleteUserByName;
-    var uri = "mobiledevices/name";
     var method = "get";
-    return utils_1.executeAction(input.auth, input.deviceName, error, deleteUser, uri, method);
+    var getMobileDeviceName = {
+        input: input,
+        uri: "mobiledevices/name"
+    };
+    return utils_1.getExecuteAction(getMobileDeviceName, input.deviceName, error, method);
 };
 exports.execute({
     auth: {
