@@ -85,12 +85,11 @@ var addSlash = function (name) {
 exports.getExecuteAction = function (_a, name, error, method) {
     var input = _a.input, uri = _a.uri;
     return __awaiter(void 0, void 0, void 0, function () {
-        var datalist, _b, list, err_1;
+        var _b, datalist, err_1;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
                     _c.trys.push([0, 6, , 7]);
-                    datalist = void 0;
                     _b = method;
                     switch (_b) {
                         case "get": return [3 /*break*/, 1];
@@ -100,20 +99,12 @@ exports.getExecuteAction = function (_a, name, error, method) {
                 case 1: return [4 /*yield*/, exports.getCall(input.auth, addSlash(name), uri)];
                 case 2:
                     datalist = _c.sent();
-                    return [3 /*break*/, 5];
+                    return [2 /*return*/, __assign(__assign({}, datalist.data), { action_success: true })];
                 case 3: return [4 /*yield*/, exports.deleteCall(input.auth, name, uri)];
                 case 4:
-                    datalist = _c.sent();
-                    return [3 /*break*/, 5];
-                case 5:
-                    list = datalist.data;
-                    switch (method) {
-                        case "delete":
-                            return [2 /*return*/, { action_success: true }];
-                        case "get":
-                            return [2 /*return*/, __assign(__assign({}, list), { action_success: true })];
-                    }
-                    return [3 /*break*/, 7];
+                    _c.sent();
+                    return [2 /*return*/, { action_success: true }];
+                case 5: return [3 /*break*/, 7];
                 case 6:
                     err_1 = _c.sent();
                     throw errors_1.errorCatches(err_1, error);

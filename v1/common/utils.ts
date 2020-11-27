@@ -1,7 +1,11 @@
 import axios from "axios";
 import * as base64 from "base-64";
 import * as R from "ramda";
-import { createT, ExecuteInfo } from "../actions/create-group-name";
+import {
+  createT,
+  errorMessage,
+  ExecuteInfo,
+} from "../actions/create-group-name";
 import { deleteUser } from "../actions/delete-user-by-name";
 import { getAllMobile } from "../actions/get-all-mobile-devices";
 import { getGroupName } from "../actions/get-groups-by-name";
@@ -63,6 +67,14 @@ export const deleteCall = (
 let addSlash = function (name: string): string {
   return (name = name ? (name.length ? `/${name}` : name) : "");
 };
+
+// type MakeRequestT<T, U> = {
+//   input: T extends object ? T : never;
+//   uri: U extends string ? U : never;
+// };
+
+// type CreateInputT = MakeRequestT<ExecuteInfo, "usergroup/name">;
+
 export const getExecuteAction = async (
   {
     input,
@@ -74,25 +86,17 @@ export const getExecuteAction = async (
     | deleteUser
     | postExecution,
   name: string,
-  error: any,
+  error: errorMessage,
   method: string
 ) => {
   try {
-    let datalist: any;
     switch (method) {
       case "get":
-        datalist = await getCall(input.auth, addSlash(name), uri);
-        break;
+        let datalist = await getCall(input.auth, addSlash(name), uri);
+        return { ...datalist.data, action_success: true };
       case "delete":
-        datalist = await deleteCall(input.auth, name, uri);
-        break;
-    }
-    let list = datalist.data;
-    switch (method) {
-      case "delete":
+        await deleteCall(input.auth, name, uri);
         return { action_success: true };
-      case "get":
-        return { ...list, action_success: true };
     }
   } catch (err) {
     throw errorCatches(err, error);
@@ -100,7 +104,7 @@ export const getExecuteAction = async (
 };
 export const postExecuteAction = async (
   { input, uri, body }: createT,
-  error: any,
+  error: errorMessage,
   method: string
 ) => {
   try {

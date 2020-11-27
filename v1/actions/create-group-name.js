@@ -1,21 +1,21 @@
 "use strict";
 exports.__esModule = true;
-exports.execute = exports.input = exports.id = void 0;
+exports.execute = exports.input = exports.name = void 0;
 var utils_1 = require("../common/utils");
 var errors_1 = require("../common/errors");
-exports.id = "create group name";
+exports.name = "create group name";
 exports.input = [
     {
         key: "name",
         displayTitle: "Group Name",
-        description: "Provide Group Name.",
+        description: "Provide group name.",
         required: true,
         config: { kind: "text" }
     },
     {
         key: "is_smart",
         displayTitle: "Is Smart",
-        description: "Provide Is Smart.",
+        description: "Provide is smart.",
         required: true,
         config: {
             kind: "enum",
@@ -31,7 +31,7 @@ exports.input = [
     {
         key: "is_notify_on_change",
         displayTitle: "Is Notify On Change",
-        description: "Provide Is Notify On Change.",
+        description: "Provide is notify on change.",
         required: false,
         config: {
             kind: "enum",
@@ -47,15 +47,15 @@ exports.input = [
     {
         key: "site_name",
         displayTitle: "Site Name",
-        description: "Provide Site Name.",
-        required: true,
+        description: "Provide site name.",
+        required: false,
         config: { kind: "text" }
     },
     {
         key: "username",
         displayTitle: "Username",
         description: "Provide username.",
-        required: true,
+        required: false,
         config: { kind: "text" }
     },
 ];
@@ -103,61 +103,9 @@ var output = {
             },
             title: "site"
         },
-        criteria: {
-            type: "collection",
-            title: "Criteria",
-            $id: "/properties/criteria",
-            item: {
-                type: "object",
-                properties: {
-                    name: {
-                        examples: ["Email Address"],
-                        type: "string",
-                        title: "Name Details",
-                        $id: "/properties/name"
-                    },
-                    priority: {
-                        examples: [0],
-                        type: "number",
-                        title: "Priority",
-                        $id: "/properties/priority"
-                    },
-                    and_or: {
-                        examples: ["and"],
-                        type: "string",
-                        title: "And Or",
-                        $id: "/properties/and_or"
-                    },
-                    search_type: {
-                        examples: ["like"],
-                        type: "string",
-                        title: "Search Type Details",
-                        $id: "/properties/search_type"
-                    },
-                    value: {
-                        examples: ["company.com"],
-                        type: "string",
-                        title: "Value",
-                        $id: "/properties/value"
-                    },
-                    opening_paren: {
-                        examples: [false],
-                        type: "boolean",
-                        title: "Opening Paren",
-                        $id: "/properties/opening_paren"
-                    },
-                    closing_paren: {
-                        examples: [false],
-                        type: "boolean",
-                        title: "Closing Paren",
-                        $id: "/properties/closing_paren"
-                    }
-                }
-            }
-        },
         users: {
             type: "collection",
-            title: "Users",
+            title: "User Details",
             $id: "/properties/users",
             item: {
                 type: "object",
@@ -169,7 +117,7 @@ var output = {
                         $id: "/properties/id"
                     },
                     username: {
-                        examples: "[AHarrison]",
+                        examples: ["AHarrison"],
                         type: "string",
                         title: "User Name",
                         $id: "/properties/username"
@@ -187,7 +135,7 @@ var output = {
                         $id: "/properties/phone_number"
                     },
                     email_address: {
-                        examples: '["aharrison',
+                        examples: ["johnsmith@company.com"],
                         type: "string",
                         title: "Email Address",
                         $id: "/properties/email_address"
@@ -196,17 +144,24 @@ var output = {
             }
         }
     },
-    type: "object"
+    type: "object",
+    title: "Create Group"
 };
 exports.execute = function (input) {
     var user_group = {
         user_group: {
             name: input.name,
-            is_smart: input.is_smart == "true",
-            is_notify_on_change: input.is_notify_on_change ? "true" : "false",
-            users: input.username ? [{ username: input.username }] : []
+            is_smart: input.is_smart == "true"
         }
     };
+    if (input.is_notify_on_change || input.username) {
+        user_group.user_group.is_notify_on_change =
+            input.is_notify_on_change == "true" ? "true" : "false";
+        user_group.user_group.users = input.username
+            .split(",")
+            .map(function (x) { return ({ username: x }); });
+    }
+    console.log(user_group);
     var error = errors_1.errors.GROUP_NAME_INVALID;
     var method = "post";
     var createGroup = {

@@ -231,7 +231,7 @@ export interface UserGroups {
   user_group: {
     name: string;
     is_smart: boolean;
-    is_notify_on_change: "true" | "false";
-    users: { username: string }[];
+    is_notify_on_change?: "true" | "false";
+    users?: { username: string }[];
   };
 }

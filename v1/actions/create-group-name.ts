@@ -2,19 +2,19 @@ import { postExecuteAction } from "../common/utils";
 import { errors } from "../common/errors";
 import { AuthT, CreateUserGroup, action1, UserGroups } from "../common/type";
 
-export const id = "create group name";
+export const name = "create group name";
 export const input = [
   {
     key: "name",
     displayTitle: "Group Name",
-    description: "Provide Group Name.",
+    description: "Provide group name.",
     required: true,
     config: { kind: "text" },
   },
   {
     key: "is_smart",
     displayTitle: "Is Smart",
-    description: "Provide Is Smart.",
+    description: "Provide is smart.",
     required: true,
     config: {
       kind: "enum",
@@ -30,7 +30,7 @@ export const input = [
   {
     key: "is_notify_on_change",
     displayTitle: "Is Notify On Change",
-    description: "Provide Is Notify On Change.",
+    description: "Provide is notify on change.",
     required: false,
     config: {
       kind: "enum",
@@ -46,15 +46,15 @@ export const input = [
   {
     key: "site_name",
     displayTitle: "Site Name",
-    description: "Provide Site Name.",
-    required: true,
+    description: "Provide site name.",
+    required: false,
     config: { kind: "text" },
   },
   {
     key: "username",
     displayTitle: "Username",
     description: "Provide username.",
-    required: true,
+    required: false,
     config: { kind: "text" },
   },
 ];
@@ -102,61 +102,9 @@ const output = {
       },
       title: "site",
     },
-    criteria: {
-      type: "collection",
-      title: "Criteria",
-      $id: "/properties/criteria",
-      item: {
-        type: "object",
-        properties: {
-          name: {
-            examples: ["Email Address"],
-            type: "string",
-            title: "Name Details",
-            $id: "/properties/name",
-          },
-          priority: {
-            examples: [0],
-            type: "number",
-            title: "Priority",
-            $id: "/properties/priority",
-          },
-          and_or: {
-            examples: ["and"],
-            type: "string",
-            title: "And Or",
-            $id: "/properties/and_or",
-          },
-          search_type: {
-            examples: ["like"],
-            type: "string",
-            title: "Search Type Details",
-            $id: "/properties/search_type",
-          },
-          value: {
-            examples: ["company.com"],
-            type: "string",
-            title: "Value",
-            $id: "/properties/value",
-          },
-          opening_paren: {
-            examples: [false],
-            type: "boolean",
-            title: "Opening Paren",
-            $id: "/properties/opening_paren",
-          },
-          closing_paren: {
-            examples: [false],
-            type: "boolean",
-            title: "Closing Paren",
-            $id: "/properties/closing_paren",
-          },
-        },
-      },
-    },
     users: {
       type: "collection",
-      title: "Users",
+      title: "User Details",
       $id: "/properties/users",
       item: {
         type: "object",
@@ -168,7 +116,7 @@ const output = {
             $id: "/properties/id",
           },
           username: {
-            examples: "[AHarrison]",
+            examples: ["AHarrison"],
             type: "string",
             title: "User Name",
             $id: "/properties/username",
@@ -186,7 +134,7 @@ const output = {
             $id: "/properties/phone_number",
           },
           email_address: {
-            examples: '["aharrison',
+            examples: ["johnsmith@company.com"],
             type: "string",
             title: "Email Address",
             $id: "/properties/email_address",
@@ -196,6 +144,7 @@ const output = {
     },
   },
   type: "object",
+  title: "Create Group",
 };
 
 export type ExecuteInfo = AuthT & CreateUserGroup;
@@ -204,17 +153,27 @@ export interface createT {
   uri: "usergroups";
   body: UserGroups;
 }
+export type errorMessage = {
+  code: string;
+  message: string;
+};
 
 export const execute = (input: ExecuteInfo) => {
   let user_group: UserGroups = {
     user_group: {
       name: input.name,
       is_smart: input.is_smart == "true",
-      is_notify_on_change: input.is_notify_on_change ? "true" : "false",
-      users: input.username ? [{ username: input.username }] : [],
     },
   };
-  let error = errors.GROUP_NAME_INVALID;
+  if (input.is_notify_on_change || input.username) {
+    user_group.user_group.is_notify_on_change =
+      input.is_notify_on_change == "true" ? "true" : "false";
+    user_group.user_group.users = input.username
+      .split(",")
+      .map((x) => ({ username: x }));
+  }
+  console.log("user_group", user_group);
+  let error: errorMessage = errors.GROUP_NAME_INVALID;
   let method: action1 = "post";
   let createGroup: createT = {
     input,
@@ -226,7 +185,7 @@ export const execute = (input: ExecuteInfo) => {
 };
 
 execute({
-  name: "nameGood",
+  name: "nameGood6",
   is_smart: "true",
   is_notify_on_change: "false",
   username: "ashok",
